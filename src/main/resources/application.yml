@@ -6,8 +6,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/fintrack
     username: postgres
     password: ankita
+    spring:
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,8 +15,7 @@ spring:
 
 jwt:
   secret: vxguuvwHbjThycwvtytwvgxyueyvwv34
-  expiration-ms: 30000
+  expiration-ms: 900000
 
 server:
   port: 8050
-

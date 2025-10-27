@@ -1,7 +1,6 @@
 package com.trackfin.fintrack.enitity;
 
 import jakarta.persistence.*;
-import jdk.jfr.MetadataDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "user_login")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userId;
+    private Long userId;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
