@@ -35,6 +35,7 @@ public class AuthService {
                 .email(req.getEmail().toLowerCase().trim())
                 .contact(req.getContact())
                 .password(passwordEncoder.encode(req.getPassword()))
+                .isActive(true)
                 .build();
         userRepository.save(u);
         String token = jwtUtil.generateToken(u.getEmail());
@@ -44,6 +45,9 @@ public class AuthService {
     public AuthResponse login(LoginRequest req) {
         User u = userRepository.findByEmail(req.getEmail().toLowerCase().trim())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+        if( !u.getIsActive()){
+            return new AuthResponse("User Inactive");
+        }
         if (!passwordEncoder.matches(req.getPassword(), u.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
@@ -54,5 +58,10 @@ public class AuthService {
     public User getByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public void deleteUser(User u) {
+        u.setIsActive(false);
+        userRepository.save(u);
     }
 }

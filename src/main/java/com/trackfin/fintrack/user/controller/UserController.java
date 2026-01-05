@@ -1,5 +1,6 @@
 package com.trackfin.fintrack.user.controller;
 
+import com.trackfin.fintrack.user.model.UserProfileResponse;
 import com.trackfin.fintrack.user.service.UserService;
 import com.trackfin.fintrack.user.enitity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,20 +9,22 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService service;
 
-    @GetMapping("listAllUsers")
+    @GetMapping("/all")
     public List<User> getAllUsers(@RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(defaultValue = "3") int size) {
+                                                 @RequestParam(defaultValue = "3") int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("userId").ascending());
         Page<User> list = service.getAllUsers(pageable);
         return list.getContent();

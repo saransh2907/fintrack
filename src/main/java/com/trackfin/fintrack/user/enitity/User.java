@@ -25,5 +25,7 @@ public class User {
     private String contact;
     @Column(nullable = false)
     private String password;
+    @Column
+    private Boolean isActive;
 
 }

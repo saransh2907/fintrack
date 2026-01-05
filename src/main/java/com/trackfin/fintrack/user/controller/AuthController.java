@@ -4,6 +4,7 @@ import com.trackfin.fintrack.user.model.LoginRequest;
 import com.trackfin.fintrack.user.enitity.User;
 import com.trackfin.fintrack.user.model.AuthResponse;
 import com.trackfin.fintrack.user.model.RegisterRequest;
+import com.trackfin.fintrack.user.model.UserProfileResponse;
 import com.trackfin.fintrack.user.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -36,9 +37,14 @@ public class AuthController {
     public ResponseEntity<UserProfileResponse> me(Authentication authentication) {
         String email = (String) authentication.getPrincipal();
         User u = authService.getByEmail(email);
-        return ResponseEntity.ok(new UserProfileResponse(u.getUserId(), u.getName(), u.getEmail()));
+        return ResponseEntity.ok(new UserProfileResponse(u.getUserId(), u.getName(), u.getEmail(), u.getIsActive()));
     }
 
-    // DTO for profile response
-    public static record UserProfileResponse(Long id, String name, String email) {}
+    @GetMapping("/deleteMe")
+    public ResponseEntity<UserProfileResponse> deleteMe(Authentication authentication) {
+        String email = (String) authentication.getPrincipal();
+        User u = authService.getByEmail(email);
+        authService.deleteUser(u);
+        return ResponseEntity.ok(new UserProfileResponse(u.getUserId(), u.getName(), u.getEmail(), u.getIsActive()));
+    }
 }
