@@ -1,7 +1,7 @@
-package com.trackfin.fintrack.controller;
+package com.trackfin.fintrack.user.controller;
 
-import com.trackfin.fintrack.enitity.User;
-import com.trackfin.fintrack.service.UserService;
+import com.trackfin.fintrack.user.service.UserService;
+import com.trackfin.fintrack.user.enitity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

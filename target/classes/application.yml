@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: fintrack
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fintrack
+    username: postgres
+    password: ankita
+    spring:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  secret: vxguuvwHbjThycwvtytwvgxyueyvwv34
+  expiration-ms: 900000
+
+server:
+  port: 8050

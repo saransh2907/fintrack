@@ -1,13 +1,13 @@
-package com.trackfin.fintrack.service;
+package com.trackfin.fintrack.user.service;
 
 
-import com.trackfin.fintrack.config.JwtUtil;
-import com.trackfin.fintrack.enitity.User;
-import com.trackfin.fintrack.model.AuthResponse;
-import com.trackfin.fintrack.model.LoginRequest;
-import com.trackfin.fintrack.repository.UserRepository;
+import com.trackfin.fintrack.user.config.JwtUtil;
+import com.trackfin.fintrack.user.model.LoginRequest;
+import com.trackfin.fintrack.user.model.RegisterRequest;
+import com.trackfin.fintrack.user.enitity.User;
+import com.trackfin.fintrack.user.model.AuthResponse;
+import com.trackfin.fintrack.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.webauthn.api.AuthenticatorResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +15,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
     private final JwtUtil jwtUtil;
 
     public AuthService(UserRepository userRepository,
@@ -25,24 +26,25 @@ public class AuthService {
         this.jwtUtil = jwtUtil;
     }
 
-//    public AuthenticatorResponse register(Usre req) {
-//        if (userRepository.existsByEmail(req.getEmail())) {
-//            throw new RuntimeException("Email already exists");
-//        }
-//        User u = User.builder()
-//                .name(req.getName())
-//                .email(req.getEmail().toLowerCase().trim())
-//                .passwordHash(passwordEncoder.encode(req.getPassword()))
-//                .build();
-//        userRepository.save(u);
-//        String token = jwtUtil.generateToken(u.getEmail());
-//        return new AuthResponse(token);
-//    }
+    public AuthResponse register(RegisterRequest req) {
+        if ( userRepository.findByEmail(req.getEmail()).isPresent() ) {
+            throw new RuntimeException("Email already exists");
+        }
+        User u = User.builder()
+                .name(req.getUserName())
+                .email(req.getEmail().toLowerCase().trim())
+                .contact(req.getContact())
+                .password(passwordEncoder.encode(req.getPassword()))
+                .build();
+        userRepository.save(u);
+        String token = jwtUtil.generateToken(u.getEmail());
+        return new AuthResponse(token);
+    }
 
     public AuthResponse login(LoginRequest req) {
         User u = userRepository.findByEmail(req.getEmail().toLowerCase().trim())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
-        if (!passwordEncoder.matches(req.getPassword(), passwordEncoder.encode(u.getPassword()))) {
+        if (!passwordEncoder.matches(req.getPassword(), u.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
         String token = jwtUtil.generateToken(u.getEmail());

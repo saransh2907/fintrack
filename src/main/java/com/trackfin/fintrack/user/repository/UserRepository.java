@@ -1,6 +1,6 @@
-package com.trackfin.fintrack.repository;
+package com.trackfin.fintrack.user.repository;
 
-import com.trackfin.fintrack.enitity.User;
+import com.trackfin.fintrack.user.enitity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

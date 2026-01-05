@@ -1,4 +1,4 @@
-package com.trackfin.fintrack.model;
+package com.trackfin.fintrack.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

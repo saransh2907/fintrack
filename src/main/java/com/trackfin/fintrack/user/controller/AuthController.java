@@ -1,9 +1,10 @@
-package com.trackfin.fintrack.controller;
+package com.trackfin.fintrack.user.controller;
 
-import com.trackfin.fintrack.enitity.User;
-import com.trackfin.fintrack.model.AuthResponse;
-import com.trackfin.fintrack.model.LoginRequest;
-import com.trackfin.fintrack.service.AuthService;
+import com.trackfin.fintrack.user.model.LoginRequest;
+import com.trackfin.fintrack.user.enitity.User;
+import com.trackfin.fintrack.user.model.AuthResponse;
+import com.trackfin.fintrack.user.model.RegisterRequest;
+import com.trackfin.fintrack.user.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +19,11 @@ public class AuthController {
         this.authService = authService;
     }
 
-    /*@PostMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
         AuthResponse resp = authService.register(request);
         return ResponseEntity.ok(resp);
-    }*/
+    }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {

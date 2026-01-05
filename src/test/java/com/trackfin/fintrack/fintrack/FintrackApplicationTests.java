@@ -1,4 +1,4 @@
-package com.trackfin.fintrack;
+package com.trackfin.fintrack.fintrack;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

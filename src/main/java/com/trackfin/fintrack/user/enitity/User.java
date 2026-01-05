@@ -1,4 +1,4 @@
-package com.trackfin.fintrack.enitity;
+package com.trackfin.fintrack.user.enitity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

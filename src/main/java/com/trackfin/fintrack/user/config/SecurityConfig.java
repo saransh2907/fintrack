@@ -1,4 +1,4 @@
-package com.trackfin.fintrack.config;
+package com.trackfin.fintrack.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

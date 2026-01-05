@@ -1,4 +1,4 @@
-package com.trackfin.fintrack.config;
+package com.trackfin.fintrack.user.config;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
