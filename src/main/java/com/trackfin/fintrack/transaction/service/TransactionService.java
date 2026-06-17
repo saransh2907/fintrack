@@ -1,6 +1,7 @@
 package com.trackfin.fintrack.transaction.service;
 
 import com.trackfin.fintrack.transaction.entity.Transactions;
+import com.trackfin.fintrack.transaction.model.TransactionsDTO;
 import com.trackfin.fintrack.transaction.model.UpdateTransactions;
 import com.trackfin.fintrack.transaction.repo.TransactionRepo;
 import com.trackfin.fintrack.user.repository.UserRepository;
@@ -21,7 +22,7 @@ public class TransactionService {
     }
 
     public Transactions addNewTransaction(Transactions transactions, String email){
-        transactions.setUser( userRepo.findByEmail(email).get() );
+        transactions.setUser(userRepo.findByEmail(email).get());
         return repo.save(transactions);
     }
 
